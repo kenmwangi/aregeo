@@ -17,13 +17,16 @@ jobs:
     - uses: actions/checkout@v4
     
     - name: Set up uv
-      uses: astral-sh/setup-uv@v3
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
     
     - name: Set up Python ${{ matrix.python-version }}
       run: uv python install ${{ matrix.python-version }}
+      
     
     - name: Install dependencies
-      run: uv sync --dev
+      run: uv sync --locked --dev
     
     - name: Run linting
       run: uv run ruff check .
@@ -32,7 +35,7 @@ jobs:
       run: uv run pyrefly check
     
     - name: Run tests
-      run: uv run pytest tests/ -v
+      run: uv run pytest
     
     - name: Test package build
       run: uv build
@@ -49,6 +52,8 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v3
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
       - run: uv build
       - run: uv publish --trusted-publishing always

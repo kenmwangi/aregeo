@@ -18,12 +18,14 @@ jobs:
 
     - name: Set up uv
       uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
 
     - name: Set up Python ${{ matrix.python-version }}
       run: uv python install ${{ matrix.python-version }}
 
     - name: Install dependencies
-      run: uv sync --all-groups
+      run: uv sync --locked--all-groups
 
     - name: Check formatting
       run: uv run ruff format --check .
@@ -35,7 +37,7 @@ jobs:
       run: uv run pyrefly check
 
     - name: Run tests
-      run: uv run pytest tests/ -v
+      run: uv run pytest
 
     - name: Test package build
       run: uv build
