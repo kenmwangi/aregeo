@@ -57,6 +57,8 @@ Homepage = "https://github.com/kenmwangi/aregeo"
 Documentation = "https://github.com/kenmwangi/aregeo#readme"
 Repository = "https://github.com/kenmwangi/aregeo"
 Issues = "https://github.com/kenmwangi/aregeo/issues"
+"African Real Estate" = "https://african-realestate.com"
+"Ken Mwangi" = "https://kenmwangi.com"
 
 [dependency-groups]
 dev = [
