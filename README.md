@@ -23,7 +23,6 @@ These descriptions can be ambiguous, difficult to search, and impossible to veri
 
 **aregeo provides tools for converting, validating, resolving, indexing, searching, and verifying precise geographic locations for real estate and property applications.**
 
----
 
 ## Why aregeo?
 
@@ -60,13 +59,11 @@ Vague Property Description
 Precise Property Location
 ```
 
----
-
 ## Features
 
 aregeo is being built to support:
 
-### 📍 Precise Coordinates
+### Precise Coordinates
 
 Validate and work with latitude and longitude coordinates.
 
@@ -80,9 +77,7 @@ coordinates = validate_coordinates(
 )
 ```
 
----
-
-### 📏 Geographic Distance
+### Geographic Distance
 
 Calculate accurate distances between locations.
 
@@ -99,9 +94,7 @@ distance = distance_between(
 print(f"{distance:.2f} meters")
 ```
 
----
-
-### 🗺️ Geospatial Indexing
+### Geospatial Indexing
 
 Generate geohashes for efficient spatial indexing and proximity search.
 
@@ -115,8 +108,6 @@ geohash = encode_geohash(
 
 print(geohash)
 ```
-
----
 
 ### Kenya Location Intelligence
 
@@ -138,8 +129,6 @@ Sub-County
 Ward
 ```
 
----
-
 ### Reverse Geocoding
 
 Planned support for converting coordinates into human-readable locations.
@@ -156,9 +145,7 @@ Nairobi County
 Kenya
 ```
 
----
-
-### 🔍 Proximity Search
+### Proximity Search
 
 Find locations and properties near a specific coordinate.
 
@@ -176,9 +163,7 @@ Nearest shopping centres
 Nearby landmarks
 ```
 
----
-
-### ✅ Location Verification
+### Location Verification
 
 aregeo aims to provide location confidence and verification tools.
 
@@ -205,8 +190,6 @@ Location Confidence: 95/100
 Status: Verified
 ```
 
----
-
 ## Installation
 
 aregeo is currently under active development.
@@ -225,8 +208,6 @@ cd aregeo
 ```bash
 uv sync
 ```
-
----
 
 ## Quick Start
 
@@ -251,8 +232,6 @@ distance = distance_between(
 print(coordinates)
 print(f"{distance:.2f} meters")
 ```
-
----
 
 ## Project Structure
 
@@ -294,8 +273,6 @@ aregeo/
 └── uv.lock
 ```
 
----
-
 ## Architecture
 
 aregeo is designed around several core geospatial capabilities.
@@ -320,8 +297,6 @@ aregeo is designed around several core geospatial capabilities.
                    Location Verification
 ```
 
----
-
 ## Technology
 
 aregeo uses modern Python tooling and geospatial libraries.
@@ -339,7 +314,6 @@ aregeo uses modern Python tooling and geospatial libraries.
 | Pyrefly | Static type checking |
 | Pytest | Testing |
 
----
 
 ## Development
 
@@ -372,8 +346,6 @@ uv run pytest
 ```bash
 uv run pytest --cov=aregeo
 ```
-
----
 
 ## Roadmap
 
@@ -419,7 +391,6 @@ uv run pytest --cov=aregeo
 - [ ] Production-ready geospatial architecture
 - [ ] Support for additional African countries
 
----
 
 ## Contributing
 
@@ -443,7 +414,6 @@ Please read:
 
 before contributing.
 
----
 
 ## Geographic Data
 
@@ -457,7 +427,6 @@ All geographic data included in the project should:
 - Include appropriate attribution where required.
 - Use documented coordinate reference systems.
 
----
 
 ## Privacy and Security
 
@@ -474,7 +443,6 @@ Possible strategies include:
 - Obfuscating residential property coordinates.
 - Using different precision levels for public and private data.
 
----
 
 ## License
 
@@ -482,7 +450,6 @@ This project is licensed under the MIT License.
 
 See the [LICENSE](LICENSE) file for details.
 
----
 
 ## Author
 
@@ -491,7 +458,6 @@ See the [LICENSE](LICENSE) file for details.
 - GitHub: https://github.com/kenmwangi
 - Email: hello@kenmwangi.com
 
----
 
 ## Vision
 

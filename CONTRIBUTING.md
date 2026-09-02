@@ -244,12 +244,10 @@ tests/
 Use descriptive test names:
 
 ```python
-def test_valid_coordinates_are_accepted() -> None:
-    ...
+def test_valid_coordinates_are_accepted() -> None: ...
 
 
-def test_invalid_latitude_is_rejected() -> None:
-    ...
+def test_invalid_latitude_is_rejected() -> None: ...
 ```
 
 Run all tests:
