@@ -27,6 +27,17 @@ class Coordinates(BaseModel):
     )
 
 
+class AdministrativeLocation(BaseModel):
+    """
+    Administrative geographic information for a property (country, county, sub-county)
+    """
+
+    country: str | None = None
+    county: str | None = None
+    sub_county: str | None = None
+    ward: str | None = None
+
+
 class PropertyLocation(BaseModel):
     """
     All Geographic information for a property (address & coordinates)
@@ -38,6 +49,7 @@ class PropertyLocation(BaseModel):
     country: str | None = None
     county: str | None = None
     sub_county: str | None = None
+    ward: str | None = None
 
     locality: str | None = None
     address: str | None = None

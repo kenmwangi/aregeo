@@ -1,14 +1,27 @@
+from __future__ import annotations
+
+from pathlib import Path
 from typing import Literal
 
 from aregeo.coordinates.validator import validate_coordinates
+from aregeo.kenya.counties import KenyaCountyService
 from aregeo.models.location import PropertyLocation
 from aregeo.spatial.geohash import encode_geohash
 
 
 class PropertyLocator:
     """
-    Entry point for locating properties based on geographic coordinates.
+    Main service for processing property locations.
     """
+
+    def __init__(
+        self,
+        kenya_counties_path: str | Path | None = None,
+    ) -> None:
+        self.county_service: KenyaCountyService | None = None
+
+        if kenya_counties_path is not None:
+            self.county_service = KenyaCountyService(kenya_counties_path)
 
     def locate(
         self,
@@ -16,55 +29,93 @@ class PropertyLocator:
         longitude: float,
         accuracy: float | None = None,
     ) -> PropertyLocation:
+        """
+        Process coordinates and return property location information.
+        """
+
         coordinates = validate_coordinates(
-            latitude=latitude, longitude=longitude, accuracy=accuracy
+            latitude=latitude,
+            longitude=longitude,
+            accuracy=accuracy,
         )
 
-        geohash = encode_geohash(latitude=latitude, longitude=longitude)
+        geohash = encode_geohash(
+            latitude=coordinates.latitude,
+            longitude=coordinates.longitude,
+        )
 
-        confidence = self._calculate_confidence(accuracy=accuracy)
+        county = self._find_county(
+            latitude=coordinates.latitude,
+            longitude=coordinates.longitude,
+        )
+
+        confidence = self._calculate_confidence(
+            accuracy=accuracy,
+            county=county,
+        )
 
         return PropertyLocation(
             latitude=coordinates.latitude,
             longitude=coordinates.longitude,
+            country="Kenya" if county else None,
+            county=county,
             accuracy=accuracy,
             geohash=geohash,
             confidence=confidence,
-            verification_status=self.__verification_status(confidence=confidence),
+            verification_status=self._verification_status(confidence),
         )
 
-    def _calculate_confidence(self, accuracy: float | None) -> int:
+    def _find_county(
+        self,
+        latitude: float,
+        longitude: float,
+    ) -> str | None:
         """
-        Calculate confidence level based on accuracy.
+        Find the Kenyan county containing the coordinates.
         """
 
-        if accuracy is None:
-            return 50
+        if self.county_service is None:
+            return None
 
-        if accuracy <= 10:
-            return 95
-        if accuracy <= 25:
-            return 85
+        return self.county_service.find_county(
+            latitude=latitude,
+            longitude=longitude,
+        )
 
-        if accuracy <= 50:
-            return 70
+    def _calculate_confidence(
+        self,
+        accuracy: float | None,
+        county: str | None,
+    ) -> int:
+        """
+        Calculate location confidence.
+        """
 
-        if accuracy <= 100:
-            return 50
+        score = 30
 
-        return 30
+        if accuracy is not None:
+            if accuracy <= 10:
+                score += 40
+            elif accuracy <= 25:
+                score += 30
+            elif accuracy <= 50:
+                score += 20
+            elif accuracy <= 100:
+                score += 10
 
-    def __verification_status(
+        if county is not None:
+            score += 20
+
+        return min(score, 100)
+
+    def _verification_status(
         self,
         confidence: int,
     ) -> Literal["unverified", "verified", "approximate"]:
-        """
-        Determine verification status based on confidence level.
-        """
-
         if confidence >= 85:
             return "verified"
-        elif confidence >= 50:
+
+        if confidence >= 50:
             return "approximate"
-        else:
-            return "unverified"
+
+        return "unverified"
