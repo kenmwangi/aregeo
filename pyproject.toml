@@ -3,6 +3,9 @@ name = "aregeo"
 version = "0.1.0"
 description = "Real Estate Geospatial location tools for converting, validating, storing and verification of precise property locations."
 readme = "README.md"
+license = {text = "MIT"}
+authors =[{name = "Ken Mwangi", email="hello@kenmwangi.com"}]
+maintainers =[{name = "Ken Mwangi", email="hello@kenmwangi.com"}]
 requires-python = ">=3.13"
 dependencies = [
     "geographiclib>=2.1",
