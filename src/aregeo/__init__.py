@@ -1,2 +1,3 @@
-def hello() -> str:
-    return "Hello from aregeo!"
+from aregeo.services.locator import PropertyLocator
+
+__all__ = ["PropertyLocator"]
