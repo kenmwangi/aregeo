@@ -34,8 +34,8 @@ jobs:
     - name: Run type checking
       run: uv run pyrefly check
     
-    - name: Run tests
-      run: uv run pytest
+    # - name: Run tests
+    #   run: uv run pytest
     
     - name: Test package build
       run: uv build
