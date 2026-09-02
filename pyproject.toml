@@ -1,11 +1,29 @@
 [project]
 name = "aregeo"
 version = "0.1.0"
-description = "Add your description here"
+description = "Real Estate Geospatial location tools for converting, validating, storing and verification of precise property locations."
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "geographiclib>=2.1",
+    "geohash2>=1.1",
+    "httpx>=0.28.1",
+    "pydantic>=2.13.5",
+]
 
 [build-system]
 requires = ["uv_build>=0.12.3,<0.13.0"]
 build-backend = "uv_build"
+
+[tool.ruff.lint]
+extend-select = ["I","B"]
+
+[tool.pyrefly]
+project.includes = ["**/*.py", "**/*.ipynb"]
+
+[dependency-groups]
+dev = [
+    "pyrefly>=1.2.0",
+    "pytest>=9.1.1",
+    "ruff>=0.16.5",
+]
